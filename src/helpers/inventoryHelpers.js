@@ -1,5 +1,7 @@
-const postItem = (item) => {
-  fetch('https://rpg-store-shopping-cart.firebaseio.com/inventory.json', {
+const db = 'https://rpg-store-shopping-cart.firebaseio.com/inventory.json';
+
+const postItemToDb = (db, item) => {
+  fetch(db, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -12,15 +14,15 @@ const postItem = (item) => {
     })
 };
 
-export const addItemsToStore = () => {
-  const items = [
-    { name: "Sword", price: 100 },
-    { name: "Shield", price: 60 },
-    { name: "Power Ring", price: 250 },
-    { name: "Bow", price: 90 },
-    { name: "Arrow", price: 5 },
-    { name: "Bomb", price: 10 }
-  ];
-
-  items.forEach(item => postItem(item))
+export const addItemsToStore = (db, items) => {
+  items.forEach(item => postItemToDb(db, item))
 };
+
+export const items = [
+  { name: "Sword", price: 100 },
+  { name: "Shield", price: 60 },
+  { name: "Power Ring", price: 250 },
+  { name: "Bow", price: 90 },
+  { name: "Arrow", price: 5 },
+  { name: "Bomb", price: 10 }
+];
