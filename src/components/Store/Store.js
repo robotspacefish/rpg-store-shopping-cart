@@ -14,11 +14,17 @@ const Store = props => {
     setIsModalVisible(true);
   }
 
-  const addToCart = (quantity) => {
+  const addToCart = quantity => {
     // TODO if item is already in cart, add to quantity
     closeModal();
     setCart(prevCart => [...prevCart, { ...itemClicked, quantity }])
     setItemClicked(null);
+  };
+
+  const deleteFromCart = itemName => {
+    setCart(prevState => (
+      prevState.filter(item => item.name !== itemName)
+    ))
   };
 
   const closeModal = () => setIsModalVisible(false);
@@ -36,7 +42,7 @@ const Store = props => {
         />
 
         {isModalVisible && <HowManyModal addToCart={addToCart} cancelAddToCart={cancelAddToCart} />}
-        <Cart cart={cart} />
+        <Cart cart={cart} deleteFromCart={deleteFromCart} />
       </div>
     </div>
   );

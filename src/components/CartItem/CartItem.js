@@ -7,6 +7,7 @@ import React from 'react';
 const CartItem = props => (
   <div className="CartItem">
     <li className="Item" onClick={() => { }}>
+      onClick={() => props.deleteFromCart(props.name)}>
       <span>{props.name}</span>
       <span>{props.totalCost}g</span>
     </li>

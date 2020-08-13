@@ -12,7 +12,11 @@ const Cart = props => {
 
   const renderCartItems = () => (
     props.cart.map(item => (
-      <CartItem key={item.name} name={item.name} totalCost={multiplier(item.price, item.quantity)} />
+      <CartItem key={item.name}
+        name={item.name}
+        totalCost={multiplier(item.price, item.quantity)}
+        deleteFromCart={props.deleteFromCart}
+      />
     ))
   );
 
