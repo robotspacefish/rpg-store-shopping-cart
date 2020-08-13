@@ -9,8 +9,11 @@ const HowManyModal = props => {
   }
 
   const handleSubmit = e => {
+    e.preventDefault();
     // TODO
     // submit how many to cart through store
+    // after, hide modal
+    props.addToCart();
   }
 
   return (

@@ -3,11 +3,23 @@ import Item from '../Item/Item';
 import { items } from '../../helpers/inventoryHelpers';
 import './Inventory.css';
 
-const renderItems = (items) => {
-  return items.map((item, index) => <Item key={index} name={item.name} price={item.price} />)
-};
-
 const Inventory = props => {
+  const renderItems = (items) => {
+    return items.map((item, index) => (
+      <Item
+        key={index}
+        name={item.name}
+        price={item.price}
+        handleOnClick={handleOnClick}
+      />
+    ))
+  };
+
+  const handleOnClick = (item) => {
+    props.handleItemClicked(item);
+
+  };
+
   return (
     <div className="Inventory">
       <h1>Inventory</h1>
