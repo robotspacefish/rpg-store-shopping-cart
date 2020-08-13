@@ -1,5 +1,6 @@
 import React from 'react';
 import CartItem from '../CartItem/CartItem';
+import './Cart.css';
 
 const multiplier = (price, qty) => price * qty;
 
@@ -18,11 +19,11 @@ const Cart = props => {
   const total = () => props.cart.reduce(reducer, 0);
 
   return (
-    <div className="Cart">
+    <div className="Cart items-container">
       <h2>Cart</h2>
       {renderCartItems()}
 
-      <div>
+      <div className="Cart__total">
         <span>TOTAL:</span>
         <span>{props.cart.length !== 0 ? total() : 0}g</span>
       </div>

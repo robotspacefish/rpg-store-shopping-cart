@@ -17,11 +17,10 @@ const Inventory = props => {
 
   const handleOnClick = (item) => {
     props.handleItemClicked(item);
-
   };
 
   return (
-    <div className="Inventory">
+    <div className="Inventory items-container">
       <h1>Inventory</h1>
       <ul className="Inventory__list">
         {renderItems(items)}
