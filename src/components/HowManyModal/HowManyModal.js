@@ -13,7 +13,7 @@ const HowManyModal = props => {
     // TODO
     // submit how many to cart through store
     // after, hide modal
-    props.addToCart();
+    props.addToCart(howMany);
   }
 
   return (

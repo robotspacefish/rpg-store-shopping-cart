@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Inventory from '../Inventory/Inventory';
+import Cart from '../Cart/Cart';
 import HowManyModal from '../HowManyModal/HowManyModal';
 import './Store.css';
 
@@ -13,9 +14,10 @@ const Store = props => {
     setIsModalVisible(true);
   }
 
-  const addToCart = () => {
+  const addToCart = (quantity) => {
+    // TODO if item is already in cart, add to quantity
     setIsModalVisible(false);
-    setCart(prevCart => [...prevCart, itemClicked])
+    setCart(prevCart => [...prevCart, { ...itemClicked, quantity }])
   };
 
   return (
