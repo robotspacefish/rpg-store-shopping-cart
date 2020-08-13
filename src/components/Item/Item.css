@@ -1,6 +1,9 @@
 .Item {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #eee;
   margin: 20px 0;
+  cursor: pointer;
+  font-size: 1.4em;
 }
