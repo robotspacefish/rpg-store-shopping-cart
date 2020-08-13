@@ -8,7 +8,7 @@ const CartItem = props => (
   <div className="CartItem">
     <li className="Item" onClick={() => { }}>
       <span>{props.name}</span>
-      <span>{props.price * props.quantity}g</span>
+      <span>{props.totalCost}g</span>
     </li>
   </div>
 );
