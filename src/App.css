@@ -6,3 +6,10 @@
   width: 80%;
   max-width: 600px;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
