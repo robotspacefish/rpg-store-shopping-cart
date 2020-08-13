@@ -16,8 +16,16 @@ const Store = props => {
 
   const addToCart = (quantity) => {
     // TODO if item is already in cart, add to quantity
-    setIsModalVisible(false);
+    closeModal();
     setCart(prevCart => [...prevCart, { ...itemClicked, quantity }])
+    setItemClicked(null);
+  };
+
+  const closeModal = () => setIsModalVisible(false);
+
+  const cancelAddToCart = () => {
+    setItemClicked(null);
+    closeModal();
   };
 
   return (
@@ -27,7 +35,7 @@ const Store = props => {
           handleItemClicked={handleItemClicked}
         />
 
-        {isModalVisible && <HowManyModal addToCart={addToCart} />}
+        {isModalVisible && <HowManyModal addToCart={addToCart} cancelAddToCart={cancelAddToCart} />}
         <Cart cart={cart} />
       </div>
     </div>
