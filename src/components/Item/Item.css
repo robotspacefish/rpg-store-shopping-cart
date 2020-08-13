@@ -1,0 +1,6 @@
+.Item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  margin: 20px 0;
+}
