@@ -15,15 +15,15 @@ const HowManyModal = props => {
 
   return (
     <form className="HowManyModal" onSubmit={handleSubmit}>
+      <h2>How Many {props.name}?</h2>
       <div>
-        <label htmlFor="how-many">How Many?</label>
         <input
           type="number"
           id="how-many"
           min="1"
           value={howMany}
           onChange={e => handleOnChange(e)}
-        />
+        />x
       </div>
       <button>Add To Cart</button>
     </form>
