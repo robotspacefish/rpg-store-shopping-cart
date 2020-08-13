@@ -26,6 +26,7 @@ const Store = props => {
         />
 
         {isModalVisible && <HowManyModal addToCart={addToCart} />}
+        <Cart cart={cart} />
       </div>
     </div>
   );
