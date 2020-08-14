@@ -1,3 +1,7 @@
+# RPG Store Shopping Cart
+
+I made this to learn about React Hooks
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
