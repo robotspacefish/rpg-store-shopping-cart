@@ -17,16 +17,12 @@ const itemClickedReducer = (currentItemClicked, action) => {
 
 const Store = props => {
   const [cart, setCart] = useState([]);
-  // const [itemClicked, setItemClicked] = useState();
-  // const [isModalVisible, setIsModalVisible] = useState(false);
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, itemClicked: null })
 
 
-  const handleItemClicked = (item) => {
-    // setItemClicked(item);
-    // setIsModalVisible(true);
+  const handleItemClicked = (item) => (
     dispatchItemClicked({ type: 'SET', itemClicked: item })
-  }
+  );
 
   const updateCart = updatedItem => (
     cart.map(item => (
