@@ -27,7 +27,9 @@ const Cart = props => {
     <div className="Cart items-container">
       <div className="Cart__content">
         <h2>Cart</h2>
-        {renderCartItems()}
+        <ul>
+          {renderCartItems()}
+        </ul>
       </div>
 
       <div className="Cart__total">

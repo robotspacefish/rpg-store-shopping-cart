@@ -1,3 +1,12 @@
+/* .CartItem {
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 1.4em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+} */
+
 li.CartItem {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6,6 +15,7 @@ li.CartItem {
   margin: 20px 0;
   cursor: pointer;
   font-size: 1.4em;
+  position: relative;
 }
 
 li.CartItem span:nth-child(2) {
@@ -16,4 +26,15 @@ li.CartItem span:nth-child(2) {
 li.CartItem span:nth-child(3) {
   justify-self: end;
   align-self: end;
+}
+
+.CartItem__removeButton {
+  width: 100%;
+  height: 100%;
+  background: white;
+  /* padding: 10px 10px 0 10px; */
+  position: absolute;
+  z-index: 999;
+  /* top: 0; */
+
 }

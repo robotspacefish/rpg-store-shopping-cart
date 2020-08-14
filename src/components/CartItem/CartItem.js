@@ -3,11 +3,22 @@ import ItemText from '../ItemText/ItemText';
 import './CartItem.css';
 
 const CartItem = props => {
-  const [isMousedOver, setIsMousedOver] = useState(true);
+  const [isMousedOver, setIsMousedOver] = useState(false);
 
   const renderRemoveButton = () => {
-    return <button className="CartItem__removeButton" onClick={() => props.deleteFromCart(props.name)}>Remove</button>
+    console.log('rendering button')
+    return <div className="CartItem__removeButton" onClick={() => props.deleteFromCart(props.name)}>Remove</div>
   }
+
+  const renderItemText = () => {
+    return (
+      <>
+        <ItemText text={props.name} className={'left'} />
+        <ItemText text={`x${props.quantity}`} className={'center'} />
+        <ItemText text={`${props.totalCost}g`} className={'right'} />
+      </>
+    );
+  };
 
   return (
     <li className="CartItem"
@@ -17,9 +28,9 @@ const CartItem = props => {
 
       {isMousedOver && renderRemoveButton()}
 
-      <ItemText text={props.name} />
-      <ItemText text={`x${props.quantity}`} />
-      <ItemText text={`${props.totalCost}g`} />
+      {renderItemText()}
+
+
     </li >
   );
 };
