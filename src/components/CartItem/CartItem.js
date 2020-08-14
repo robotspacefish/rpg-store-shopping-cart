@@ -1,9 +1,6 @@
 import React from 'react';
+import ItemText from '../ItemText/ItemText';
 import './CartItem.css';
-
-//TODO - merge with Item later
-// For now, use this to display item name and price x quantity
-// click to delete?
 
 const handleMouseOver = (e) => {
   // TODO delete text
@@ -12,9 +9,9 @@ const handleMouseOver = (e) => {
 const CartItem = props => (
   <li className="CartItem" onMouseOver={handleMouseOver}
     onClick={() => props.deleteFromCart(props.name)}>
-    <span>{props.name}</span>
-    <span>{`x${props.quantity}`}</span>
-    <span>{`${props.totalCost}g`}</span>
+    <ItemText text={props.name} />
+    <ItemText text={`x${props.quantity}`} />
+    <ItemText text={`${props.totalCost}g`} />
   </li>
 );
 
