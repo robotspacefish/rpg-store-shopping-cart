@@ -16,20 +16,26 @@ const HowManyModal = props => {
   const handleCancel = () => props.cancelAddToCart();
 
   return (
-    <form className="HowManyModal" onSubmit={handleSubmit}>
-      <h2>How Many {props.itemClicked.name}s?</h2>
-      <div>
-        <input
-          type="number"
-          id="how-many"
-          min="1"
-          value={howMany}
-          onChange={e => handleOnChange(e)}
-        />x
+    <div className="HowManyModal">
+      {/* <div className="HowManyModal__form-container"> */}
+      <form className="HowManyModal__form" onSubmit={handleSubmit}>
+        <h2>How Many {props.itemClicked.name}s?</h2>
+        <div className="HowManyModal__input-container">
+          <input
+            type="number"
+            id="how-many"
+            min="1"
+            value={howMany}
+            onChange={e => handleOnChange(e)}
+          />x
       </div>
-      <button onClick={handleCancel}>Cancel</button>
-      <button>Add To Cart</button>
-    </form >
+        <div className="HowManyModal__buttons">
+          <button className="HowManyModal__cancel-button" onClick={handleCancel}>Cancel</button>
+          <button>Add To Cart</button>
+        </div>
+      </form >
+      {/* </div> */}
+    </div>
   );
 };
 

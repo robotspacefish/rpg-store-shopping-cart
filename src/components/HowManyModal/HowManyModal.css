@@ -1,2 +1,57 @@
 .HowManyModal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100000;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(2, 2, 2, 0.4);
+  /* margin-top: 20%; */
+}
+
+.HowManyModal__form {
+  background: white;
+  width:90%;
+  max-width: 600px;
+  padding: 20px;
+  text-align: center;
+}
+
+.HowManyModal__input-container {
+  /* text-align: right; */
+}
+
+.HowManyModal__buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.HowManyModal button {
+  background: white;
+  padding: 8px 15px;
+  border: 1px solid black;
+  font-size: inherit;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+button.HowManyModal__cancel-button {
+  background-color: red;
+  color: white;
+}
+
+.HowManyModal__form input {
+  background: none;
+  border: none;
+  width: 50px;
+  font-size: 1.5em;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
 }
