@@ -13,12 +13,14 @@
 }
 
 .HowManyModal__form {
-  background: white;
   width:90%;
   max-width: 600px;
   padding: 20px;
   text-align: center;
   margin-top: -20%;
+  background: blue;
+  border: 9px double white;
+  border-radius: 15px;
 }
 
 .HowManyModal__buttons {
@@ -30,16 +32,23 @@
 .HowManyModal button {
   background: white;
   padding: 8px 15px;
-  border: 1px solid black;
+  border: 3px solid white;
   font-size: inherit;
   cursor: pointer;
   font-weight: bold;
   letter-spacing: 1px;
+  font-family: inherit;
 }
 
 button.HowManyModal__cancel-button {
   background-color: red;
   color: white;
+}
+
+button.HowManyModal__confirm-button {
+  background: white;
+  color: blue;
+  border-color: darkblue;
 }
 
 .HowManyModal__form input {
@@ -48,6 +57,7 @@ button.HowManyModal__cancel-button {
   width: 50px;
   font-size: 1.5em;
   text-align: center;
-  border-bottom: 1px solid #333;
   cursor: pointer;
+  font-family: inherit;
+  color: white;
 }

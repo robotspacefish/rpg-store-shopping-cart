@@ -1,3 +1,13 @@
+.Cart {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Cart__content {
+  flex: 1;
+}
+
 .Cart__total {
   display: flex;
   justify-content: space-between;
