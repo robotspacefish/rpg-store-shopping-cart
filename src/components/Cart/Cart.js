@@ -14,6 +14,7 @@ const Cart = props => {
     props.cart.map(item => (
       <CartItem key={item.name}
         name={item.name}
+        quantity={item.quantity}
         totalCost={multiplier(item.price, item.quantity)}
         deleteFromCart={props.deleteFromCart}
       />
@@ -24,8 +25,10 @@ const Cart = props => {
 
   return (
     <div className="Cart items-container">
-      <h2>Cart</h2>
-      {renderCartItems()}
+      <div className="Cart__content">
+        <h2>Cart</h2>
+        {renderCartItems()}
+      </div>
 
       <div className="Cart__total">
         <span>TOTAL:</span>
