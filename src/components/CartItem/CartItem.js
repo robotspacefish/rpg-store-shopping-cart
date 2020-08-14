@@ -1,4 +1,5 @@
 import React from 'react';
+import './CartItem.css';
 
 //TODO - merge with Item later
 // For now, use this to display item name and price x quantity
@@ -9,13 +10,12 @@ const handleMouseOver = (e) => {
 };
 
 const CartItem = props => (
-  <div className="CartItem">
-    <li className="Item" onMouseOver={handleMouseOver}
-      onClick={() => props.deleteFromCart(props.name)}>
-      <span>{props.name}</span>
-      <span>{props.totalCost}g</span>
-    </li>
-  </div>
+  <li className="CartItem" onMouseOver={handleMouseOver}
+    onClick={() => props.deleteFromCart(props.name)}>
+    <span>{props.name}</span>
+    <span>{`x${props.quantity}`}</span>
+    <span>{`${props.totalCost}g`}</span>
+  </li>
 );
 
 export default CartItem;
