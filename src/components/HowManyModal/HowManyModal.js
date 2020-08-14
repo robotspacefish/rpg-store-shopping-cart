@@ -17,7 +17,6 @@ const HowManyModal = props => {
 
   return (
     <div className="HowManyModal">
-      {/* <div className="HowManyModal__form-container"> */}
       <form className="HowManyModal__form" onSubmit={handleSubmit}>
         <h2>How Many {props.itemClicked.name}s?</h2>
         <div className="HowManyModal__input-container">
@@ -34,7 +33,6 @@ const HowManyModal = props => {
           <button>Add To Cart</button>
         </div>
       </form >
-      {/* </div> */}
     </div>
   );
 };

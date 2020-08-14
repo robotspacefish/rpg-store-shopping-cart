@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
   background: rgba(2, 2, 2, 0.4);
-  /* margin-top: 20%; */
 }
 
 .HowManyModal__form {
@@ -20,9 +19,6 @@
   padding: 20px;
   text-align: center;
   margin-top: -20%;
-
-.HowManyModal__input-container {
-  /* text-align: right; */
 }
 
 .HowManyModal__buttons {
