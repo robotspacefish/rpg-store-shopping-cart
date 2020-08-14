@@ -21,7 +21,7 @@ const Inventory = props => {
 
   return (
     <div className="Inventory items-container">
-      <h1>Inventory</h1>
+      <h2>Inventory</h2>
       <ul className="Inventory__list">
         {renderItems(items)}
       </ul>
