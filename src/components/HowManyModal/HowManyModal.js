@@ -8,16 +8,16 @@ const HowManyModal = props => {
     setHowMany(parseInt(e.target.value))
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.addToCart(howMany);
+    props.addToCart(props.itemClicked, howMany);
   }
 
   const handleCancel = () => props.cancelAddToCart();
 
   return (
     <form className="HowManyModal" onSubmit={handleSubmit}>
-      <h2>How Many {props.name}?</h2>
+      <h2>How Many {props.itemClicked.name}s?</h2>
       <div>
         <input
           type="number"
@@ -29,7 +29,7 @@ const HowManyModal = props => {
       </div>
       <button onClick={handleCancel}>Cancel</button>
       <button>Add To Cart</button>
-    </form>
+    </form >
   );
 };
 

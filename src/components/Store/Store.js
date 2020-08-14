@@ -14,11 +14,27 @@ const Store = props => {
     setIsModalVisible(true);
   }
 
-  const addToCart = quantity => {
-    // TODO if item is already in cart, add to quantity
-    closeModal();
-    setCart(prevCart => [...prevCart, { ...itemClicked, quantity }])
+  const updateCart = updatedItem => (
+    cart.map(item => (
+      item.name === updatedItem.name ?
+        updatedItem : item
+    ))
+  );
+
+  const addToCart = (itemToAdd, quantity) => {
+    let itemFoundInCart = cart.find(item => item.name === itemToAdd.name);
+
+    if (!itemFoundInCart) {
+      setCart(prevCart => [...prevCart, { ...itemClicked, quantity }])
+    } else {
+      itemFoundInCart = { ...itemFoundInCart, quantity: itemFoundInCart.quantity + quantity }
+
+      const updatedCart = updateCart(itemFoundInCart);
+      setCart(updatedCart);
+    }
+
     setItemClicked(null);
+    closeModal();
   };
 
   const deleteFromCart = itemName => {
@@ -41,7 +57,7 @@ const Store = props => {
           handleItemClicked={handleItemClicked}
         />
 
-        {isModalVisible && <HowManyModal addToCart={addToCart} cancelAddToCart={cancelAddToCart} />}
+        {isModalVisible && <HowManyModal itemClicked={itemClicked} addToCart={addToCart} cancelAddToCart={cancelAddToCart} />}
         <Cart cart={cart} deleteFromCart={deleteFromCart} />
       </div>
     </div>
