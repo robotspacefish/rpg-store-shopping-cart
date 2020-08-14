@@ -17,8 +17,7 @@ const itemClickedReducer = (currentItemClicked, action) => {
 
 const Store = props => {
   const [cart, setCart] = useState([]);
-  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, itemClicked: null })
-
+  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, itemClicked: null });
 
   const handleItemClicked = (item) => (
     dispatchItemClicked({ type: 'SET', itemClicked: item })
@@ -46,11 +45,11 @@ const Store = props => {
     clearItemClicked();
   };
 
-  const deleteFromCart = itemName => {
+  const deleteFromCart = itemName => (
     setCart(prevState => (
       prevState.filter(item => item.name !== itemName)
     ))
-  };
+  );
 
   const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 
