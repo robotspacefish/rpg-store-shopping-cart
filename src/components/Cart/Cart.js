@@ -6,6 +6,8 @@ import { multiplier, total } from '../../helpers/cartHelpers';
 import './Cart.css';
 
 const Cart = props => {
+  const handleOnClick = item => props.handleItemClicked(item);
+
   const renderCartItems = () => (
     props.cart.map(item => (
       <CartItem key={item.name}
@@ -15,10 +17,6 @@ const Cart = props => {
       />
     ))
   );
-
-  const handleOnClick = item => {
-    props.handleItemClicked(item);
-  }
 
   return (
     <div className="Cart items-container">
