@@ -16,9 +16,14 @@ const Cart = props => {
         quantity={item.quantity}
         totalCost={multiplier(item.price, item.quantity)}
         deleteFromCart={props.deleteFromCart}
+        handleOnClick={handleOnClick}
       />
     ))
   );
+
+  const handleOnClick = item => {
+    props.handleItemClicked(item);
+  }
 
   const total = () => props.cart.reduce(reducer, 0);
 

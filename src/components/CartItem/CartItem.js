@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ItemText from '../ItemText/ItemText';
+import HowManyModal from '../HowManyModal/HowManyModal';
 import './CartItem.css';
 
 const CartItem = props => {
@@ -29,6 +30,12 @@ const CartItem = props => {
     );
   }
 
+  const renderModal = () => {
+    return (
+      <HowManyModal itemClicked={props} />
+    );
+  }
+
   const renderItemText = () => {
     return (
       <>
@@ -41,8 +48,9 @@ const CartItem = props => {
 
   return (
     <li className="CartItem"
-      onMouseEnter={(e) => setIsMousedOver(true)}
-      onMouseLeave={(e) => setIsMousedOver(false)}
+      onClick={() => props.handleOnClick({ name: props.name, price: props.price, quantity: props.quantity })}
+    // onMouseEnter={(e) => setIsMousedOver(true)}
+    // onMouseLeave={(e) => setIsMousedOver(false)}
     >
 
       {isMousedOver && renderRemoveForm()}

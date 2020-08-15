@@ -7,9 +7,9 @@ import './Store.css';
 const itemClickedReducer = (currentItemClicked, action) => {
   switch (action.type) {
     case 'SET':
-      return { isModalVisible: true, itemClicked: action.itemClicked }
+      return { isModalVisible: true, modalType: action.modalType, itemClicked: action.itemClicked }
     case 'CLEAR':
-      return { isModalVisible: false, itemClicked: null }
+      return { isModalVisible: false, modalType: null, itemClicked: null }
     default:
       throw new Error('There was a problem.');
   }
@@ -17,11 +17,12 @@ const itemClickedReducer = (currentItemClicked, action) => {
 
 const Store = props => {
   const [cart, setCart] = useState([]);
-  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, itemClicked: null });
+  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, itemClicked: null });
 
-  const handleItemClicked = (item) => (
-    dispatchItemClicked({ type: 'SET', itemClicked: item })
-  );
+  const handleItemClicked = (item) => {
+    const modalType = item.hasOwnProperty('quantity') ? 'remove' : 'add';
+    dispatchItemClicked({ type: 'SET', itemClicked: item, modalType })
+  };
 
   const updateCart = updatedItem => (
     cart.map(item => (
@@ -45,13 +46,13 @@ const Store = props => {
     clearItemClicked();
   };
 
-  const deleteFromCart = (itemName, quantityToRemove) => {
-    let itemFromCart = cart.find(i => i.name === itemName);
+  const deleteFromCart = (itemToRemove, quantityToRemove) => {
+    let itemFromCart = cart.find(i => i.name === itemToRemove.name);
 
     if (itemFromCart.quantity === quantityToRemove) {
       // delete entire item
       setCart(prevState => (
-        prevState.filter(item => item.name !== itemName)
+        prevState.filter(item => item.name !== itemToRemove.name)
       ))
     } else {
       // subtract quantity
@@ -61,10 +62,30 @@ const Store = props => {
           prevItem.name === itemFromCart.name ? itemFromCart : prevItem)
         ))
       );
+
     }
+
+    clearItemClicked();
   };
 
   const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
+
+  const renderModal = () => {
+    const modalType = itemClicked.modalType;
+    const submitCallback = modalType === 'add' ? addToCart : deleteFromCart;
+    const className = modalType === 'add' ? 'add-item' : 'remove-item';
+    const buttonText = modalType === 'add' ? 'Add to Cart' : 'Remove from Cart';
+
+    return (
+      <HowManyModal
+        itemClicked={itemClicked.itemClicked}
+        submitCallback={submitCallback}
+        cancelCallback={clearItemClicked}
+        className={className}
+        buttonText={buttonText}
+      />
+    );
+  }
 
   return (
     <div className="Store">
@@ -75,15 +96,13 @@ const Store = props => {
 
         {
           itemClicked.isModalVisible &&
-          <HowManyModal
-            itemClicked={itemClicked.itemClicked}
-            submitCallback={addToCart}
-            cancelCallback={clearItemClicked}
-            className="add-item"
-            buttonText="Add to Cart"
-          />
+          renderModal()
         }
-        <Cart cart={cart} deleteFromCart={deleteFromCart} />
+        <Cart
+          cart={cart}
+          deleteFromCart={deleteFromCart}
+          handleItemClicked={handleItemClicked}
+        />
       </div>
     </div>
   );
