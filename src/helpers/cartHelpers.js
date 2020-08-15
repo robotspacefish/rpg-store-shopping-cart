@@ -16,6 +16,8 @@ export const reducer = (accumulator, currentValue) => (
   accumulator + multiplier(currentValue.price, currentValue.quantity)
 );
 
+export const total = (cart) => cart.reduce(reducer, 0);
+
 const mapUpdate = (cart, updatedItem, prop) => (
   cart.map(item => (
     item[prop] === updatedItem[prop] ?

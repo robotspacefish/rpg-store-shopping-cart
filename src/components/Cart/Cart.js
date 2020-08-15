@@ -1,7 +1,7 @@
 import React from 'react';
 import CartItem from '../CartItem/CartItem';
 
-import { multiplier, reducer } from '../../helpers/cartHelpers';
+import { multiplier, total } from '../../helpers/cartHelpers';
 
 import './Cart.css';
 
@@ -20,8 +20,6 @@ const Cart = props => {
     props.handleItemClicked(item);
   }
 
-  const total = () => props.cart.reduce(reducer, 0);
-
   return (
     <div className="Cart items-container">
       <div className="Cart__content">
@@ -33,7 +31,7 @@ const Cart = props => {
 
       <div className="Cart__total">
         <span>TOTAL:</span>
-        <span>{props.cart.length !== 0 ? total() : 0}g</span>
+        <span>{props.cart.length !== 0 ? total(props.cart) : 0}g</span>
       </div>
 
     </div>
