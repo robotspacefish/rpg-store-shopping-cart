@@ -1,21 +1,16 @@
 import React from 'react';
 import CartItem from '../CartItem/CartItem';
+
+import { multiplier, reducer } from '../../helpers/cartHelpers';
+
 import './Cart.css';
-
-const multiplier = (price, qty) => price * qty;
-
-const reducer = (accumulator, currentValue) => (
-  accumulator + multiplier(currentValue.price, currentValue.quantity)
-);
 
 const Cart = props => {
   const renderCartItems = () => (
     props.cart.map(item => (
       <CartItem key={item.name}
-        name={item.name}
-        quantity={item.quantity}
+        item={item}
         totalCost={multiplier(item.price, item.quantity)}
-        deleteFromCart={props.deleteFromCart}
         handleOnClick={handleOnClick}
       />
     ))

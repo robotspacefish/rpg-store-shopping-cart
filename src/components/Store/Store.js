@@ -2,6 +2,9 @@ import React, { useState, useReducer } from 'react';
 import Inventory from '../Inventory/Inventory';
 import Cart from '../Cart/Cart';
 import HowManyModal from '../HowManyModal/HowManyModal';
+
+import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
+
 import './Store.css';
 
 const itemClickedReducer = (currentItemClicked, action) => {
@@ -23,7 +26,6 @@ const itemClickedReducer = (currentItemClicked, action) => {
   }
 };
 
-
 const Store = props => {
   const [cart, setCart] = useState([]);
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, itemClicked: null });
@@ -34,38 +36,17 @@ const Store = props => {
     dispatchItemClicked({ type: 'SET', itemClicked: item, modalType })
   };
 
-
-  const mapUpdatedCart = (updatedItem, prop) => (
-    cart.map(item => (
-      item[prop] === updatedItem[prop] ?
-        updatedItem : item
-    ))
-  );
+  const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 
   const updateCart = (itemToUpdate, quantity) => {
     let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
-
     let updatedCart = itemClicked.modalType === 'add' ?
-      addToCart(itemFoundInCart, quantity) :
-      deleteFromCart(itemFoundInCart, quantity);
+      addUpdate(cart, itemFoundInCart, quantity, itemClicked.itemClicked) :
+      deleteUpdate(cart, itemFoundInCart, quantity);
 
     setCart(updatedCart);
     clearItemClicked();
   }
-
-  const addToCart = (foundItem, quantity) => {
-    return foundItem ?
-      mapUpdatedCart({ ...foundItem, quantity: foundItem.quantity + quantity }, 'name') :
-      [...cart, { ...itemClicked.itemClicked, quantity }];
-  }
-
-  const deleteFromCart = (foundItem, quantity) => {
-    return foundItem.quantity === quantity ?
-      cart.filter(item => item.name !== foundItem.name) :
-      mapUpdatedCart({ ...foundItem, quantity: foundItem.quantity - quantity }, 'name');
-  }
-
-  const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 
   const renderModal = () => {
     const modalType = itemClicked.modalType;
@@ -95,7 +76,6 @@ const Store = props => {
         }
         <Cart
           cart={cart}
-          deleteFromCart={deleteFromCart}
           handleItemClicked={handleItemClicked}
         />
       </div>
