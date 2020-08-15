@@ -13,13 +13,13 @@ const itemClickedReducer = (currentItemClicked, action) => {
       return {
         isModalVisible: true,
         modalType: action.modalType,
-        itemClicked: action.itemClicked
+        item: action.item
       }
     case 'CLEAR':
       return {
         isModalVisible: false,
         modalType: null,
-        itemClicked: null
+        item: null
       }
     default:
       throw new Error('There was a problem.');
@@ -28,52 +28,50 @@ const itemClickedReducer = (currentItemClicked, action) => {
 
 const Store = props => {
   const [cart, setCart] = useState([]);
-  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, itemClicked: null });
+  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
 
   const handleItemClicked = (item) => {
     const modalType = item.hasOwnProperty('quantity') ? 'remove' : 'add';
 
-    dispatchItemClicked({ type: 'SET', itemClicked: item, modalType })
+    dispatchItemClicked({ type: 'SET', item, modalType })
   };
 
   const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 
   const updateCart = (itemToUpdate, quantity) => {
     let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
+
     let updatedCart = itemClicked.modalType === 'add' ?
-      addUpdate(cart, itemFoundInCart, quantity, itemClicked.itemClicked) :
+      addUpdate(cart, itemFoundInCart, quantity, itemClicked.item) :
       deleteUpdate(cart, itemFoundInCart, quantity);
 
     setCart(updatedCart);
     clearItemClicked();
-  }
+  };
 
   const renderModal = () => {
     const modalType = itemClicked.modalType;
-    const buttonText = modalType === 'add' ? 'Add to Cart' : 'Remove from Cart';
+    const buttonText = modalType === 'add' ?
+      'Add to Cart' : 'Remove from Cart';
 
     return (
       <HowManyModal
-        itemClicked={itemClicked.itemClicked}
+        itemClicked={itemClicked.item}
         submitCallback={updateCart}
         cancelCallback={clearItemClicked}
         buttonText={buttonText}
         modalType={itemClicked.modalType}
       />
     );
-  }
+  };
 
   return (
     <div className="Store">
       <div className="Store__Inventory">
-        <Inventory
-          handleItemClicked={handleItemClicked}
-        />
+        <Inventory handleItemClicked={handleItemClicked} />
 
-        {
-          itemClicked.isModalVisible &&
-          renderModal()
-        }
+        {itemClicked.isModalVisible && renderModal()}
+
         <Cart
           cart={cart}
           handleItemClicked={handleItemClicked}
