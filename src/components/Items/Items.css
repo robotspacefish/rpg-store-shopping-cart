@@ -1,0 +1,28 @@
+.Inventory__list {
+  padding: 0;
+  width: 100%;
+}
+
+.Cart {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Cart__content {
+  flex: 1;
+}
+
+.Cart__list {
+  padding: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.Cart__total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 1.4em;
+}

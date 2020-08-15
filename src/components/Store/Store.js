@@ -1,6 +1,5 @@
 import React, { useState, useReducer } from 'react';
-import Inventory from '../Inventory/Inventory';
-import Cart from '../Cart/Cart';
+import Items from '../Items/Items';
 import HowManyModal from '../HowManyModal/HowManyModal';
 
 import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
@@ -68,11 +67,11 @@ const Store = props => {
   return (
     <div className="Store">
       <div className="Store__Inventory">
-        <Inventory handleItemClicked={handleItemClicked} />
+        <Items handleItemClicked={handleItemClicked} />
 
         {itemClicked.isModalVisible && renderModal()}
 
-        <Cart
+        <Items
           cart={cart}
           handleItemClicked={handleItemClicked}
         />
