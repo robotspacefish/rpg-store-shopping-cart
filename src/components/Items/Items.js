@@ -20,7 +20,7 @@ const Items = props => {
 
   const renderItem = (item, index) => (
     <Item key={index} item={item}
-      className="Item" handleOnClick={handleOnClick} >
+      className={`${type}Item`} handleOnClick={handleOnClick} >
       <ItemText text={item.name} />
 
       {
