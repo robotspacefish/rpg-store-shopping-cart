@@ -8,8 +8,8 @@ const CartItem = props => {
     return (
       <>
         <ItemText text={props.name} className={'left'} />
-        <ItemText text={`x${props.quantity}`} className={'center'} />
-        <ItemText text={`${props.totalCost}g`} className={'right'} />
+        <ItemText text={`x${props.quantity}`} />
+        <ItemText text={`${props.totalCost}g`} />
       </>
     );
   };
