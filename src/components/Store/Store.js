@@ -23,6 +23,7 @@ const itemClickedReducer = (currentItemClicked, action) => {
   }
 };
 
+
 const Store = props => {
   const [cart, setCart] = useState([]);
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, itemClicked: null });
@@ -33,27 +34,30 @@ const Store = props => {
     dispatchItemClicked({ type: 'SET', itemClicked: item, modalType })
   };
 
-  const updateCart = updatedItem => (
+
+  const mapUpdatedCart = (updatedItem, prop) => (
     cart.map(item => (
-      item.name === updatedItem.name ?
+      item[prop] === updatedItem[prop] ?
         updatedItem : item
     ))
   );
 
-  const addToCart = (itemToAdd, quantity) => {
-    let itemFoundInCart = cart.find(item => item.name === itemToAdd.name);
+  const updateCart = (itemToUpdate, quantity) => {
+    let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
 
-    if (!itemFoundInCart) {
-      setCart(prevCart => [...prevCart, { ...itemClicked.itemClicked, quantity }])
-    } else {
-      itemFoundInCart = { ...itemFoundInCart, quantity: itemFoundInCart.quantity + quantity }
+    let updatedCart = itemClicked.modalType === 'add' ?
+      addToCart(itemFoundInCart, quantity) :
+      null;
 
-      const updatedCart = updateCart(itemFoundInCart);
-      setCart(updatedCart);
-    }
-
+    setCart(updatedCart);
     clearItemClicked();
-  };
+  }
+
+  const addToCart = (foundItem, quantity) => {
+    return foundItem ?
+      mapUpdatedCart({ ...foundItem, quantity: foundItem.quantity + quantity }, 'name') :
+      [...cart, { ...itemClicked.itemClicked, quantity }];
+  }
 
   const deleteFromCart = (itemToRemove, quantityToRemove) => {
     let itemFromCart = cart.find(i => i.name === itemToRemove.name);
@@ -81,7 +85,7 @@ const Store = props => {
 
   const renderModal = () => {
     const modalType = itemClicked.modalType;
-    const submitCallback = modalType === 'add' ? addToCart : deleteFromCart;
+    const submitCallback = modalType === 'add' ? updateCart : deleteFromCart;
     const buttonText = modalType === 'add' ? 'Add to Cart' : 'Remove from Cart';
 
     return (
