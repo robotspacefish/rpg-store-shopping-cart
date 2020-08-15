@@ -73,7 +73,16 @@ const Store = props => {
           handleItemClicked={handleItemClicked}
         />
 
-        {itemClicked.isModalVisible && <HowManyModal itemClicked={itemClicked.itemClicked} addToCart={addToCart} cancelAddToCart={clearItemClicked} />}
+        {
+          itemClicked.isModalVisible &&
+          <HowManyModal
+            itemClicked={itemClicked.itemClicked}
+            submitCallback={addToCart}
+            cancelCallback={clearItemClicked}
+            className="add-item"
+            buttonText="Add to Cart"
+          />
+        }
         <Cart cart={cart} deleteFromCart={deleteFromCart} />
       </div>
     </div>
