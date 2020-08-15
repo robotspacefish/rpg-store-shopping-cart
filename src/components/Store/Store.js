@@ -47,7 +47,7 @@ const Store = props => {
 
     let updatedCart = itemClicked.modalType === 'add' ?
       addToCart(itemFoundInCart, quantity) :
-      null;
+      deleteFromCart(itemFoundInCart, quantity);
 
     setCart(updatedCart);
     clearItemClicked();
@@ -59,39 +59,22 @@ const Store = props => {
       [...cart, { ...itemClicked.itemClicked, quantity }];
   }
 
-  const deleteFromCart = (itemToRemove, quantityToRemove) => {
-    let itemFromCart = cart.find(i => i.name === itemToRemove.name);
-
-    if (itemFromCart.quantity === quantityToRemove) {
-      // delete entire item
-      setCart(prevState => (
-        prevState.filter(item => item.name !== itemToRemove.name)
-      ))
-    } else {
-      // subtract quantity
-      itemFromCart = { ...itemFromCart, quantity: itemFromCart.quantity - quantityToRemove }
-      setCart(prevState => (
-        prevState.map(prevItem => (
-          prevItem.name === itemFromCart.name ? itemFromCart : prevItem)
-        ))
-      );
-
-    }
-
-    clearItemClicked();
-  };
+  const deleteFromCart = (foundItem, quantity) => {
+    return foundItem.quantity === quantity ?
+      cart.filter(item => item.name !== foundItem.name) :
+      mapUpdatedCart({ ...foundItem, quantity: foundItem.quantity - quantity }, 'name');
+  }
 
   const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 
   const renderModal = () => {
     const modalType = itemClicked.modalType;
-    const submitCallback = modalType === 'add' ? updateCart : deleteFromCart;
     const buttonText = modalType === 'add' ? 'Add to Cart' : 'Remove from Cart';
 
     return (
       <HowManyModal
         itemClicked={itemClicked.itemClicked}
-        submitCallback={submitCallback}
+        submitCallback={updateCart}
         cancelCallback={clearItemClicked}
         buttonText={buttonText}
         modalType={itemClicked.modalType}
