@@ -1,5 +1,6 @@
 import React from 'react';
-import CartItem from '../CartItem/CartItem';
+import Item from '../Item/Item';
+import ItemText from '../ItemText/ItemText';
 
 import { multiplier, total } from '../../helpers/cartHelpers';
 
@@ -8,14 +9,17 @@ import './Cart.css';
 const Cart = props => {
   const handleOnClick = item => props.handleItemClicked(item);
 
-  const renderCartItems = () => (
-    props.cart.map(item => (
-      <CartItem key={item.name}
-        item={item}
-        totalCost={multiplier(item.price, item.quantity)}
-        handleOnClick={handleOnClick}
-      />
-    ))
+  const renderItems = (items) => (
+    items.map((item, index) => renderItem(item, index))
+  );
+
+  const renderItem = (item, index) => (
+    <Item key={index} item={item}
+      className="CartItem" handleOnClick={handleOnClick} >
+      <ItemText text={item.name} />
+      <ItemText text={`x${item.quantity}`} />
+      <ItemText text={`${multiplier(item.price, item.quantity)}g`} />
+    </Item>
   );
 
   return (
@@ -23,7 +27,7 @@ const Cart = props => {
       <div className="Cart__content">
         <h2>Cart</h2>
         <ul>
-          {renderCartItems()}
+          {renderItems(props.cart)}
         </ul>
       </div>
 

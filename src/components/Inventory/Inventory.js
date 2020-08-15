@@ -1,23 +1,24 @@
 import React from 'react';
 import Item from '../Item/Item';
+import ItemText from '../ItemText/ItemText';
 import { items } from '../../helpers/inventoryHelpers';
 import './Inventory.css';
 
 const Inventory = props => {
-  const renderItems = (items) => {
-    return items.map((item, index) => (
-      <Item
-        key={index}
-        name={item.name}
-        price={item.price}
-        handleOnClick={handleOnClick}
-      />
-    ))
-  };
+  const handleOnClick = (item) => props.handleItemClicked(item);
 
-  const handleOnClick = (item) => {
-    props.handleItemClicked(item);
-  };
+  const renderItems = (items) => (
+    items.map((item, index) => renderItem(item, index))
+  );
+
+  const renderItem = (item, index) => (
+    <Item key={index} item={item}
+      className="Item" handleOnClick={handleOnClick} >
+      <ItemText text={item.name} />
+      <ItemText text={`${item.price}g`} />
+    </Item>
+  );
+
 
   return (
     <div className="Inventory items-container">
