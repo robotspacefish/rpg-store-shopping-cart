@@ -4,38 +4,6 @@ import HowManyModal from '../HowManyModal/HowManyModal';
 import './CartItem.css';
 
 const CartItem = props => {
-  const [isMousedOver, setIsMousedOver] = useState(false);
-  const [howMany, setHowMany] = useState(1);
-  const handleOnChange = e => {
-    setHowMany(parseInt(e.target.value))
-  }
-
-  const handleDelete = e => {
-    e.preventDefault();
-    props.deleteFromCart(props.name, howMany);
-    setIsMousedOver(false);
-    setHowMany(1);
-  }
-
-  const renderRemoveForm = () => {
-    return (
-      <form className="CartItem__removeButton" onSubmit={handleDelete}>
-        <label>Remove {props.name}(s)?</label>
-        <div>
-          x<input type="number" min="1" max={props.quantity} value={howMany}
-            onChange={e => handleOnChange(e)} />
-        </div>
-        <button>Remove</button>
-      </form>
-    );
-  }
-
-  const renderModal = () => {
-    return (
-      <HowManyModal itemClicked={props} />
-    );
-  }
-
   const renderItemText = () => {
     return (
       <>
@@ -49,15 +17,8 @@ const CartItem = props => {
   return (
     <li className="CartItem"
       onClick={() => props.handleOnClick({ name: props.name, price: props.price, quantity: props.quantity })}
-    // onMouseEnter={(e) => setIsMousedOver(true)}
-    // onMouseLeave={(e) => setIsMousedOver(false)}
     >
-
-      {isMousedOver && renderRemoveForm()}
-
       {renderItemText()}
-
-
     </li >
   );
 };
