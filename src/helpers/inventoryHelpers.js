@@ -18,7 +18,7 @@ export const addItemsToStore = (db, items) => {
   items.forEach(item => postItemToDb(db, item))
 };
 
-export const items = [
+export const storeItems = [
   { name: "Sword", price: 100 },
   { name: "Shield", price: 60 },
   { name: "Power Ring", price: 250 },

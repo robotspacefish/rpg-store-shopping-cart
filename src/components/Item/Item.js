@@ -1,7 +1,5 @@
 import React from 'react';
-
 import './Item.css';
-import './CartItem.css';
 
 const Item = props => {
   const { handleOnClick, item, className } = props;
