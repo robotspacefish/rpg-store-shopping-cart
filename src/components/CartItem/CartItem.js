@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ItemText from '../ItemText/ItemText';
-import HowManyModal from '../HowManyModal/HowManyModal';
 import './CartItem.css';
 
 const CartItem = props => {
+  const { item, handleOnClick, totalCost } = props;
+
   const renderItemText = () => {
     return (
       <>
-        <ItemText text={props.name} className={'left'} />
-        <ItemText text={`x${props.quantity}`} />
-        <ItemText text={`${props.totalCost}g`} />
+        <ItemText text={item.name} />
+        <ItemText text={`x${item.quantity}`} />
+        <ItemText text={`${totalCost}g`} />
       </>
     );
   };
 
   return (
-    <li className="CartItem"
-      onClick={() => props.handleOnClick({ name: props.name, price: props.price, quantity: props.quantity })}
-    >
+    <li className="CartItem" onClick={() => handleOnClick(item)}>
       {renderItemText()}
     </li >
   );
