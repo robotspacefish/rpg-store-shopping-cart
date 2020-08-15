@@ -1,26 +1,22 @@
 import React from 'react';
 import CartItem from '../CartItem/CartItem';
+
+import { multiplier, total } from '../../helpers/cartHelpers';
+
 import './Cart.css';
 
-const multiplier = (price, qty) => price * qty;
-
-const reducer = (accumulator, currentValue) => (
-  accumulator + multiplier(currentValue.price, currentValue.quantity)
-);
-
 const Cart = props => {
+  const handleOnClick = item => props.handleItemClicked(item);
+
   const renderCartItems = () => (
     props.cart.map(item => (
       <CartItem key={item.name}
-        name={item.name}
-        quantity={item.quantity}
+        item={item}
         totalCost={multiplier(item.price, item.quantity)}
-        deleteFromCart={props.deleteFromCart}
+        handleOnClick={handleOnClick}
       />
     ))
   );
-
-  const total = () => props.cart.reduce(reducer, 0);
 
   return (
     <div className="Cart items-container">
@@ -33,7 +29,7 @@ const Cart = props => {
 
       <div className="Cart__total">
         <span>TOTAL:</span>
-        <span>{props.cart.length !== 0 ? total() : 0}g</span>
+        <span>{props.cart.length !== 0 ? total(props.cart) : 0}g</span>
       </div>
 
     </div>

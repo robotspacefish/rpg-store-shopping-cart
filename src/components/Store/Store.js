@@ -2,14 +2,25 @@ import React, { useState, useReducer } from 'react';
 import Inventory from '../Inventory/Inventory';
 import Cart from '../Cart/Cart';
 import HowManyModal from '../HowManyModal/HowManyModal';
+
+import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
+
 import './Store.css';
 
 const itemClickedReducer = (currentItemClicked, action) => {
   switch (action.type) {
     case 'SET':
-      return { isModalVisible: true, itemClicked: action.itemClicked }
+      return {
+        isModalVisible: true,
+        modalType: action.modalType,
+        item: action.item
+      }
     case 'CLEAR':
-      return { isModalVisible: false, itemClicked: null }
+      return {
+        isModalVisible: false,
+        modalType: null,
+        item: null
+      }
     default:
       throw new Error('There was a problem.');
   }
@@ -17,64 +28,54 @@ const itemClickedReducer = (currentItemClicked, action) => {
 
 const Store = props => {
   const [cart, setCart] = useState([]);
-  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, itemClicked: null });
+  const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
 
-  const handleItemClicked = (item) => (
-    dispatchItemClicked({ type: 'SET', itemClicked: item })
-  );
+  const handleItemClicked = (item) => {
+    const modalType = item.hasOwnProperty('quantity') ? 'remove' : 'add';
 
-  const updateCart = updatedItem => (
-    cart.map(item => (
-      item.name === updatedItem.name ?
-        updatedItem : item
-    ))
-  );
-
-  const addToCart = (itemToAdd, quantity) => {
-    let itemFoundInCart = cart.find(item => item.name === itemToAdd.name);
-
-    if (!itemFoundInCart) {
-      setCart(prevCart => [...prevCart, { ...itemClicked.itemClicked, quantity }])
-    } else {
-      itemFoundInCart = { ...itemFoundInCart, quantity: itemFoundInCart.quantity + quantity }
-
-      const updatedCart = updateCart(itemFoundInCart);
-      setCart(updatedCart);
-    }
-
-    clearItemClicked();
-  };
-
-  const deleteFromCart = (itemName, quantityToRemove) => {
-    let itemFromCart = cart.find(i => i.name === itemName);
-
-    if (itemFromCart.quantity === quantityToRemove) {
-      // delete entire item
-      setCart(prevState => (
-        prevState.filter(item => item.name !== itemName)
-      ))
-    } else {
-      // subtract quantity
-      itemFromCart = { ...itemFromCart, quantity: itemFromCart.quantity - quantityToRemove }
-      setCart(prevState => (
-        prevState.map(prevItem => (
-          prevItem.name === itemFromCart.name ? itemFromCart : prevItem)
-        ))
-      );
-    }
+    dispatchItemClicked({ type: 'SET', item, modalType })
   };
 
   const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 
+  const updateCart = (itemToUpdate, quantity) => {
+    let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
+
+    let updatedCart = itemClicked.modalType === 'add' ?
+      addUpdate(cart, itemFoundInCart, quantity, itemClicked.item) :
+      deleteUpdate(cart, itemFoundInCart, quantity);
+
+    setCart(updatedCart);
+    clearItemClicked();
+  };
+
+  const renderModal = () => {
+    const modalType = itemClicked.modalType;
+    const buttonText = modalType === 'add' ?
+      'Add to Cart' : 'Remove from Cart';
+
+    return (
+      <HowManyModal
+        itemClicked={itemClicked.item}
+        submitCallback={updateCart}
+        cancelCallback={clearItemClicked}
+        buttonText={buttonText}
+        modalType={itemClicked.modalType}
+      />
+    );
+  };
+
   return (
     <div className="Store">
       <div className="Store__Inventory">
-        <Inventory
+        <Inventory handleItemClicked={handleItemClicked} />
+
+        {itemClicked.isModalVisible && renderModal()}
+
+        <Cart
+          cart={cart}
           handleItemClicked={handleItemClicked}
         />
-
-        {itemClicked.isModalVisible && <HowManyModal itemClicked={itemClicked.itemClicked} addToCart={addToCart} cancelAddToCart={clearItemClicked} />}
-        <Cart cart={cart} deleteFromCart={deleteFromCart} />
       </div>
     </div>
   );

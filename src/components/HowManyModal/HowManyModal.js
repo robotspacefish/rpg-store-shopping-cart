@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './HowManyModal.css';
 
 const HowManyModal = props => {
+  const { itemClicked, buttonText, submitCallback, cancelCallback, modalType } = props;
+
   const [howMany, setHowMany] = useState(1);
 
   const handleOnChange = e => {
@@ -10,27 +12,31 @@ const HowManyModal = props => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addToCart(props.itemClicked, howMany);
+    submitCallback(itemClicked, howMany);
   }
 
-  const handleCancel = () => props.cancelAddToCart();
+  const handleCancel = () => cancelCallback();
 
   return (
     <div className="HowManyModal">
       <form className="HowManyModal__form" onSubmit={handleSubmit}>
-        <h2>How Many {props.itemClicked.name}s?</h2>
+        <h2>How Many {itemClicked.name}s?</h2>
         <div className="HowManyModal__input-container">
           x<input
             type="number"
             id="how-many"
             min="1"
+            max={`${modalType === 'remove' ? itemClicked.quantity : 99}`}
             value={howMany}
             onChange={e => handleOnChange(e)}
           />
         </div>
         <div className="HowManyModal__buttons">
-          <button className="HowManyModal__cancel-button" onClick={handleCancel}>Cancel</button>
-          <button className="HowManyModal__confirm-button">Add To Cart</button>
+          <button className="HowManyModal__cancel-button" onClick={handleCancel}>
+            Cancel
+          </button>
+
+          <button className="HowManyModal__confirm-button">{buttonText}</button>
         </div>
       </form >
     </div>
