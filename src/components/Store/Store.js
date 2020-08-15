@@ -45,11 +45,24 @@ const Store = props => {
     clearItemClicked();
   };
 
-  const deleteFromCart = itemName => (
-    setCart(prevState => (
-      prevState.filter(item => item.name !== itemName)
-    ))
-  );
+  const deleteFromCart = (itemName, quantityToRemove) => {
+    let itemFromCart = cart.find(i => i.name === itemName);
+
+    if (itemFromCart.quantity === quantityToRemove) {
+      // delete entire item
+      setCart(prevState => (
+        prevState.filter(item => item.name !== itemName)
+      ))
+    } else {
+      // subtract quantity
+      itemFromCart = { ...itemFromCart, quantity: itemFromCart.quantity - quantityToRemove }
+      setCart(prevState => (
+        prevState.map(prevItem => (
+          prevItem.name === itemFromCart.name ? itemFromCart : prevItem)
+        ))
+      );
+    }
+  };
 
   const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
 

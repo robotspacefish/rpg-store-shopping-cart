@@ -9,7 +9,6 @@ const reducer = (accumulator, currentValue) => (
 );
 
 const Cart = props => {
-
   const renderCartItems = () => (
     props.cart.map(item => (
       <CartItem key={item.name}
@@ -27,7 +26,9 @@ const Cart = props => {
     <div className="Cart items-container">
       <div className="Cart__content">
         <h2>Cart</h2>
-        {renderCartItems()}
+        <ul>
+          {renderCartItems()}
+        </ul>
       </div>
 
       <div className="Cart__total">
