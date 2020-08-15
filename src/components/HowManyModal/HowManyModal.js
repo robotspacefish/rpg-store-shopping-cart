@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './HowManyModal.css';
 
 const HowManyModal = props => {
-  const { itemClicked, buttonText, submitCallback, cancelCallback, className } = props;
+  const { itemClicked, buttonText, submitCallback, cancelCallback, modalType } = props;
 
   const [howMany, setHowMany] = useState(1);
 
@@ -26,7 +26,7 @@ const HowManyModal = props => {
             type="number"
             id="how-many"
             min="1"
-            max={`${className === 'remove-item' ? itemClicked.quantity : 99}`}
+            max={`${modalType === 'remove' ? itemClicked.quantity : 99}`}
             value={howMany}
             onChange={e => handleOnChange(e)}
           />

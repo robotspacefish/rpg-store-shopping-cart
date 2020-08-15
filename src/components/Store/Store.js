@@ -7,9 +7,17 @@ import './Store.css';
 const itemClickedReducer = (currentItemClicked, action) => {
   switch (action.type) {
     case 'SET':
-      return { isModalVisible: true, modalType: action.modalType, itemClicked: action.itemClicked }
+      return {
+        isModalVisible: true,
+        modalType: action.modalType,
+        itemClicked: action.itemClicked
+      }
     case 'CLEAR':
-      return { isModalVisible: false, modalType: null, itemClicked: null }
+      return {
+        isModalVisible: false,
+        modalType: null,
+        itemClicked: null
+      }
     default:
       throw new Error('There was a problem.');
   }
@@ -21,6 +29,7 @@ const Store = props => {
 
   const handleItemClicked = (item) => {
     const modalType = item.hasOwnProperty('quantity') ? 'remove' : 'add';
+
     dispatchItemClicked({ type: 'SET', itemClicked: item, modalType })
   };
 
@@ -73,7 +82,6 @@ const Store = props => {
   const renderModal = () => {
     const modalType = itemClicked.modalType;
     const submitCallback = modalType === 'add' ? addToCart : deleteFromCart;
-    const className = modalType === 'add' ? 'add-item' : 'remove-item';
     const buttonText = modalType === 'add' ? 'Add to Cart' : 'Remove from Cart';
 
     return (
@@ -81,8 +89,8 @@ const Store = props => {
         itemClicked={itemClicked.itemClicked}
         submitCallback={submitCallback}
         cancelCallback={clearItemClicked}
-        className={className}
         buttonText={buttonText}
+        modalType={itemClicked.modalType}
       />
     );
   }
