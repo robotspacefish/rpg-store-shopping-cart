@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6086107ddde96be15695878660d6336f",
+    "revision": "50563dbe8e650711005495c3a5f0c92e",
     "url": "/rpg-store-shopping-cart/index.html"
   },
   {
-    "revision": "c828c4afe9e2e55a103d",
-    "url": "/rpg-store-shopping-cart/static/css/main.5690e0ef.chunk.css"
+    "revision": "dac3b0f64369a454ad79",
+    "url": "/rpg-store-shopping-cart/static/css/main.676ac531.chunk.css"
   },
   {
     "revision": "f7596e3a51ed5eb1c1fc",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/rpg-store-shopping-cart/static/js/2.ac384760.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c828c4afe9e2e55a103d",
-    "url": "/rpg-store-shopping-cart/static/js/main.53bd11cc.chunk.js"
+    "revision": "dac3b0f64369a454ad79",
+    "url": "/rpg-store-shopping-cart/static/js/main.d9e776fd.chunk.js"
   },
   {
     "revision": "490378d279e754cc2017",

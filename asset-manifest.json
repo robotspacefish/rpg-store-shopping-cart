@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/rpg-store-shopping-cart/static/css/main.5690e0ef.chunk.css",
-    "main.js": "/rpg-store-shopping-cart/static/js/main.53bd11cc.chunk.js",
-    "main.js.map": "/rpg-store-shopping-cart/static/js/main.53bd11cc.chunk.js.map",
+    "main.css": "/rpg-store-shopping-cart/static/css/main.676ac531.chunk.css",
+    "main.js": "/rpg-store-shopping-cart/static/js/main.d9e776fd.chunk.js",
+    "main.js.map": "/rpg-store-shopping-cart/static/js/main.d9e776fd.chunk.js.map",
     "runtime-main.js": "/rpg-store-shopping-cart/static/js/runtime-main.5396238d.js",
     "runtime-main.js.map": "/rpg-store-shopping-cart/static/js/runtime-main.5396238d.js.map",
     "static/js/2.ac384760.chunk.js": "/rpg-store-shopping-cart/static/js/2.ac384760.chunk.js",
     "static/js/2.ac384760.chunk.js.map": "/rpg-store-shopping-cart/static/js/2.ac384760.chunk.js.map",
     "index.html": "/rpg-store-shopping-cart/index.html",
-    "precache-manifest.1cf65d2afaeea40182d79a3b09bf15ee.js": "/rpg-store-shopping-cart/precache-manifest.1cf65d2afaeea40182d79a3b09bf15ee.js",
+    "precache-manifest.f97898eecb5a3d4f02ffba0ed74506be.js": "/rpg-store-shopping-cart/precache-manifest.f97898eecb5a3d4f02ffba0ed74506be.js",
     "service-worker.js": "/rpg-store-shopping-cart/service-worker.js",
-    "static/css/main.5690e0ef.chunk.css.map": "/rpg-store-shopping-cart/static/css/main.5690e0ef.chunk.css.map",
+    "static/css/main.676ac531.chunk.css.map": "/rpg-store-shopping-cart/static/css/main.676ac531.chunk.css.map",
     "static/js/2.ac384760.chunk.js.LICENSE.txt": "/rpg-store-shopping-cart/static/js/2.ac384760.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5396238d.js",
     "static/js/2.ac384760.chunk.js",
-    "static/css/main.5690e0ef.chunk.css",
-    "static/js/main.53bd11cc.chunk.js"
+    "static/css/main.676ac531.chunk.css",
+    "static/js/main.d9e776fd.chunk.js"
   ]
 }
