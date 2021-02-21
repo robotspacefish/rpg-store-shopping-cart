@@ -1,11 +1,11 @@
 import React from 'react';
 import './ItemText.css';
 
-const ItemText = props => {
-  const classes = props.className ? `ItemText ${props.className}` : 'ItemText';
+const ItemText = ({ className, text }) => {
+  const classes = className ? `ItemText ${className}` : 'ItemText';
   return (
     <span className={classes}>
-      {props.text}
+      {text}
     </span>
   );
 };
