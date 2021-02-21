@@ -30,7 +30,7 @@ const itemClickedReducer = (currentItemClicked, action) => {
   }
 };
 
-const Store = props => {
+const Store = () => {
   const [cart, setCart] = useState([]);
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
 
