@@ -3,7 +3,7 @@ import './Item.css';
 import { ACTIONS } from '../Store/Store';
 import { MODAL } from '../Store/Store';
 
-const Item = ({ handleOnClick, item, className, children, dispatchItemClicked }) => {
+const Item = ({ item, className, children, dispatchItemClicked }) => {
   return (
     <li className={className}
       onClick={() => (

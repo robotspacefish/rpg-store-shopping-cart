@@ -114,7 +114,6 @@ const Store = () => {
     <div className="Store">
       <div className="Store__Inventory">
         <Items
-          handleItemClicked={handleItemClicked}
           dispatchItemClicked={dispatchItemClicked}
         />
 
@@ -122,7 +121,6 @@ const Store = () => {
 
         <Items
           cart={cart}
-          handleItemClicked={handleItemClicked}
         />
       </div>
     </div>
