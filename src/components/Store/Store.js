@@ -6,15 +6,20 @@ import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
 
 import './Store.css';
 
+const ACTIONS = {
+  SET: 'set',
+  CLEAR: 'clear',
+}
+
 const itemClickedReducer = (currentItemClicked, action) => {
   switch (action.type) {
-    case 'SET':
+    case ACTIONS.SET:
       return {
         isModalVisible: true,
         modalType: action.modalType,
         item: action.item
       }
-    case 'CLEAR':
+    case ACTIONS.CLEAR:
       return {
         isModalVisible: false,
         modalType: null,
@@ -32,10 +37,10 @@ const Store = props => {
   const handleItemClicked = (item) => {
     const modalType = item.hasOwnProperty('quantity') ? 'remove' : 'add';
 
-    dispatchItemClicked({ type: 'SET', item, modalType })
+    dispatchItemClicked({ type: ACTIONS.SET, item, modalType })
   };
 
-  const clearItemClicked = () => dispatchItemClicked({ type: 'CLEAR' });
+  const clearItemClicked = () => dispatchItemClicked({ type: ACTIONS.CLEAR });
 
   const updateCart = (itemToUpdate, quantity) => {
     let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
