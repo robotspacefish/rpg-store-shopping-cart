@@ -18,24 +18,26 @@ const Items = props => {
     items.map((item, index) => renderItem(item, index))
   );
 
-  const renderItem = (item, index) => (
-    <Item key={index} item={item}
-      className={`${type}Item`} handleOnClick={handleOnClick} >
-      <ItemText text={item.name} />
+  const renderItem = (item, index) => {
+    return (
+      <Item key={index} item={item}
+        className={`${type}Item`} handleOnClick={handleOnClick} >
+        <ItemText text={item.name} />
 
-      {
-        isCart ? (
-          <>
-            <ItemText text={`x${item.quantity}`} />
-            <ItemText text={`${multiplier(item.price, item.quantity)}g`} />
-          </>
-        )
-          :
-          <ItemText text={`${item.price}g`} />
-      }
+        {
+          isCart ? (
+            <>
+              <ItemText text={`x${item.quantity}`} />
+              <ItemText text={`${multiplier(item.price, item.quantity)}g`} />
+            </>
+          )
+            :
+            <ItemText text={`${item.price}g`} />
+        }
 
-    </Item>
-  );
+      </Item>
+    )
+  };
 
   const renderTotal = () => (
     <div className="Cart__total">
