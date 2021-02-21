@@ -40,14 +40,34 @@ const itemClickedReducer = (currentItemClicked, action) => {
 const cartReducer = (cart, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
-      // debugger
-      return [...cart, { ...action.payload.item, quantity: action.payload.qty }]
+      return addToCart(cart, action.payload.item, action.payload.qty)
+
     case ACTIONS.REMOVE_FROM_CART:
     // TODO
     default:
       return cart;
   }
 };
+
+/**
+ * Add new item to cart or update existing item quantity
+ * @param {Array} cart
+ * @param {Object} item
+ * @param {Number} quantity
+ * @return {Array} if cart is empty, return an array with the new item only
+ * @return {Array} cart with either existing item quantity updated or new item added
+ */
+function addToCart(cart, item, quantity) {
+
+  if (cart.length === 0) return [{ ...item, quantity }];
+
+  return cart.map(i => (
+    i.name === item.name ?
+      { ...i, quantity: i.quantity += quantity }
+      :
+      { ...item, quantity }
+  ));
+}
 
 const Store = () => {
   const [cart2, dispatchCart] = useReducer(cartReducer, []);
