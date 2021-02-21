@@ -3,14 +3,14 @@ import Item from '../Item/Item';
 import ItemText from '../ItemText/ItemText';
 
 import { multiplier, total } from '../../helpers/cartHelpers';
-import { storeItems } from '../../helpers/inventoryHelpers';
+import { STORE_ITEMS } from '../../helpers/inventoryHelpers';
 
 import './Items.css';
 
 const Items = props => {
   const isCart = props.hasOwnProperty('cart');
   const type = isCart ? 'Cart' : 'Inventory';
-  const items = isCart ? [...props.cart] : [...storeItems];
+  const items = isCart ? [...props.cart] : [...STORE_ITEMS];
 
   const handleOnClick = (item) => props.handleItemClicked(item);
 
