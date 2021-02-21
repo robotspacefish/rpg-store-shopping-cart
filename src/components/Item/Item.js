@@ -3,11 +3,11 @@ import './Item.css';
 import { ACTIONS } from '../Store/Store';
 import { MODAL } from '../Store/Store';
 
-const Item = ({ item, className, children, dispatchItemClicked }) => {
+const Item = ({ item, className, dispatch, children }) => {
   return (
     <li className={className}
       onClick={() => (
-        dispatchItemClicked({ type: ACTIONS.SET, modalType: MODAL.ADD, item })
+        dispatch({ type: ACTIONS.SET, modalType: MODAL.ADD, item })
       )}
     >
       {children}

@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react';
-import Items from '../Items/Items';
+import InventoryItems from '../InventoryItems/InventoryItems';
+import CartItems from '../CartItems/CartItems';
 import HowManyModal from '../HowManyModal/HowManyModal';
 
 import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
@@ -113,15 +114,11 @@ const Store = () => {
   return (
     <div className="Store">
       <div className="Store__Inventory">
-        <Items
-          dispatchItemClicked={dispatchItemClicked}
-        />
+        <InventoryItems dispatch={dispatchItemClicked} />
 
         {itemClicked.isModalVisible && renderModal()}
 
-        <Items
-          cart={cart}
-        />
+        <CartItems items={cart} dispatch={dispatchItemClicked} />
       </div>
     </div>
   );
