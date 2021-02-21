@@ -21,7 +21,9 @@ const Items = props => {
   const renderItem = (item, index) => {
     return (
       <Item key={index} item={item}
-        className={`${type}Item`} handleOnClick={handleOnClick} >
+        className={`${type}Item`} handleOnClick={handleOnClick}
+        dispatchItemClicked={props.dispatchItemClicked}
+      >
         <ItemText text={item.name} />
 
         {

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './HowManyModal.css';
+import { ACTIONS } from '../Store/Store';
 
 const HowManyModal = props => {
-  const { itemClicked, buttonText, submitCallback, cancelCallback, modalType } = props;
+  const { itemClicked, buttonText, submitCallback, cancelCallback, modalType, dispatchCart } = props;
 
   const [howMany, setHowMany] = useState(1);
 
@@ -12,6 +13,12 @@ const HowManyModal = props => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    modalType === 'add' ?
+      dispatchCart({ type: ACTIONS.ADD_TO_CART, payload: { item: itemClicked, qty: howMany } }) :
+      dispatchCart({ type: ACTIONS.REMOVE_FROM_CART })
+
+
     submitCallback(itemClicked, howMany);
   }
 

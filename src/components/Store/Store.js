@@ -6,9 +6,11 @@ import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
 
 import './Store.css';
 
-const ACTIONS = {
+export const ACTIONS = {
   SET: 'set',
   CLEAR: 'clear',
+  ADD_TO_CART: 'add-to-cart',
+  REMOVE_FROM_CART: 'remove-from-cart'
 }
 
 const itemClickedReducer = (currentItemClicked, action) => {
@@ -30,8 +32,21 @@ const itemClickedReducer = (currentItemClicked, action) => {
   }
 };
 
+const cartReducer = (cart, action) => {
+  switch (action.type) {
+    case ACTIONS.ADD_TO_CART:
+      // debugger
+      return [...cart, { ...action.payload.item, quantity: action.payload.qty }]
+    case ACTIONS.REMOVE_FROM_CART:
+    // TODO
+    default:
+      return cart;
+  }
+};
+
 const Store = () => {
-  const [cart, setCart] = useState([]);
+  const [cart2, dispatchCart] = useReducer(cartReducer, []);
+  const [cart, setCart] = useState([])
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
 
   const handleItemClicked = (item) => {
@@ -61,6 +76,7 @@ const Store = () => {
     return (
       <HowManyModal
         itemClicked={itemClicked.item}
+        dispatchCart={dispatchCart}
         submitCallback={updateCart}
         cancelCallback={clearItemClicked}
         buttonText={buttonText}
@@ -72,7 +88,10 @@ const Store = () => {
   return (
     <div className="Store">
       <div className="Store__Inventory">
-        <Items handleItemClicked={handleItemClicked} />
+        <Items
+          handleItemClicked={handleItemClicked}
+          dispatchItemClicked={dispatchItemClicked}
+        />
 
         {itemClicked.isModalVisible && renderModal()}
 
