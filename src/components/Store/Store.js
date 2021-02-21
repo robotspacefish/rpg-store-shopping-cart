@@ -13,6 +13,11 @@ export const ACTIONS = {
   REMOVE_FROM_CART: 'remove-from-cart'
 }
 
+export const MODAL = {
+  ADD: 'add',
+  REMOVE: 'remove'
+}
+
 const itemClickedReducer = (currentItemClicked, action) => {
   switch (action.type) {
     case ACTIONS.SET:
@@ -50,7 +55,7 @@ const Store = () => {
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
 
   const handleItemClicked = (item) => {
-    const modalType = item.hasOwnProperty('quantity') ? 'remove' : 'add';
+    const modalType = item.hasOwnProperty('quantity') ? MODAL.REMOVE : MODAL.ADD;
 
     dispatchItemClicked({ type: ACTIONS.SET, item, modalType })
   };
@@ -60,7 +65,7 @@ const Store = () => {
   const updateCart = (itemToUpdate, quantity) => {
     let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
 
-    let updatedCart = itemClicked.modalType === 'add' ?
+    let updatedCart = itemClicked.modalType === MODAL.ADD ?
       addUpdate(cart, itemFoundInCart, quantity, itemClicked.item) :
       deleteUpdate(cart, itemFoundInCart, quantity);
 
@@ -70,7 +75,7 @@ const Store = () => {
 
   const renderModal = () => {
     const modalType = itemClicked.modalType;
-    const buttonText = modalType === 'add' ?
+    const buttonText = modalType === MODAL.ADD ?
       'Add to Cart' : 'Remove from Cart';
 
     return (
