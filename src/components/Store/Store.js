@@ -18,6 +18,7 @@ export const MODAL = {
 }
 
 const itemClickedReducer = (currentItemClicked, action) => {
+  console.log('itemClickedReducer')
   switch (action.type) {
     case ACTIONS.SET:
       return {
@@ -37,15 +38,32 @@ const itemClickedReducer = (currentItemClicked, action) => {
 };
 
 const cartReducer = (cart, action) => {
+  console.log('cartReducer')
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
       return addToCart(cart, action.payload.item, action.payload.qty)
     case ACTIONS.REMOVE_FROM_CART:
-    // TODO
+      return removeFromCart(cart, action.payload.item, action.payload.qty)
     default:
       return cart;
   }
 };
+
+function removeFromCart(cart, item, quantity) {
+  console.log('remove x', quantity, item, ' from cart')
+  if (item.quantity === quantity) {
+    // remove entire item
+    return cart.filter(i => i.name !== item.name);
+  }
+
+  // remove quantity from item
+  return cart.map(i => (
+    i.name === item.name ?
+      { ...i, quantity: i.quantity -= quantity }
+      :
+      item
+  ))
+}
 
 /**
  * Add new item to cart or update existing item quantity
@@ -56,7 +74,7 @@ const cartReducer = (cart, action) => {
  * @return {Array} cart with either existing item quantity updated or new item added
  */
 function addToCart(cart, item, quantity) {
-
+  console.log('adding x', quantity, item, ' to cart')
   if (cart.length === 0) return [{ ...item, quantity }];
 
   return cart.map(i => (
@@ -67,28 +85,27 @@ function addToCart(cart, item, quantity) {
   ));
 }
 
+const addItemClickedToCart = (item, qty, dispatch) => dispatch({ type: ACTIONS.ADD_TO_CART, payload: { item, qty } });
+
+const removeItemClickedFromCart = (item, qty, dispatch) => dispatch({ type: ACTIONS.REMOVE_FROM_CART, payload: { item, qty } });
+
 const Store = () => {
-  const [cart2, dispatchCart] = useReducer(cartReducer, []);
-  const [cart, setCart] = useState([])
+  console.log('Store')
+  const [cart, dispatchCart] = useReducer(cartReducer, []);
+
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
-
-  const handleItemClicked = (item) => {
-    const modalType = item.hasOwnProperty('quantity') ? MODAL.REMOVE : MODAL.ADD;
-
-    dispatchItemClicked({ type: ACTIONS.SET, item, modalType })
-  };
 
   const clearItemClicked = () => dispatchItemClicked({ type: ACTIONS.CLEAR });
 
-  const updateCart = (itemToUpdate, quantity) => {
-    let itemFoundInCart = cart.find(item => item.name === itemToUpdate.name);
+  const submitItem = (qty) => {
+    // debugger
+    const fn = itemClicked.modalType === MODAL.ADD ? addItemClickedToCart : removeItemClickedFromCart;
 
-    let updatedCart = itemClicked.modalType === MODAL.ADD ?
-      addUpdate(cart, itemFoundInCart, quantity, itemClicked.item) :
-      deleteUpdate(cart, itemFoundInCart, quantity);
-
-    setCart(updatedCart);
     clearItemClicked();
+    const item = itemClicked.item;
+
+    fn(item, qty, dispatchItemClicked);
+
   };
 
   const renderModal = () => {
@@ -98,12 +115,12 @@ const Store = () => {
 
     return (
       <HowManyModal
-        itemClicked={itemClicked.item}
-        dispatchCart={dispatchCart}
-        submitCallback={updateCart}
-        cancelCallback={clearItemClicked}
-        buttonText={buttonText}
         modalType={itemClicked.modalType}
+        itemClicked={itemClicked.item}
+        clearItemClicked={clearItemClicked}
+        submitItem={submitItem}
+        dispatchCart={dispatchCart}
+        buttonText={buttonText}
       />
     );
   };
