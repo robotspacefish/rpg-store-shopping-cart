@@ -3,32 +3,28 @@ import './HowManyModal.css';
 import { ACTIONS } from '../Store/Store';
 import { MODAL } from '../Store/Store';
 
-const HowManyModal = props => {
-  const { itemClicked, buttonText, submitCallback, cancelCallback, modalType, dispatchCart } = props;
+const HowManyModal = ({ itemClicked, buttonText, modalType, dispatchCart, clearItemClicked, submitItem }) => {
 
   const [howMany, setHowMany] = useState(1);
 
-  const handleOnChange = e => {
-    setHowMany(parseInt(e.target.value))
-  }
+  const handleOnChange = e => setHowMany(parseInt(e.target.value));
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    modalType === MODAL.ADD ?
-      dispatchCart({ type: ACTIONS.ADD_TO_CART, payload: { item: itemClicked, qty: howMany } }) :
-      dispatchCart({ type: ACTIONS.REMOVE_FROM_CART })
+    const type = modalType === MODAL.ADD ? ACTIONS.ADD_TO_CART : ACTIONS.REMOVE_FROM_CART
 
+    dispatchCart({ payload: { item: itemClicked, qty: howMany }, type });
 
-    submitCallback(itemClicked, howMany);
+    clearItemClicked();
   }
-
-  const handleCancel = () => cancelCallback();
 
   return (
     <div className="HowManyModal">
       <form className="HowManyModal__form" onSubmit={handleSubmit}>
+
         <h2>How Many {itemClicked.name}s?</h2>
+
         <div className="HowManyModal__input-container">
           x<input
             type="number"
@@ -39,8 +35,9 @@ const HowManyModal = props => {
             onChange={e => handleOnChange(e)}
           />
         </div>
+
         <div className="HowManyModal__buttons">
-          <button className="HowManyModal__cancel-button" onClick={handleCancel}>
+          <button className="HowManyModal__cancel-button" onClick={clearItemClicked}>
             Cancel
           </button>
 
