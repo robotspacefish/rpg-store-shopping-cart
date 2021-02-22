@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './HowManyModal.css';
-import { ACTIONS } from '../Store/Store';
+import ModalButton from '../ModalButton/ModalButton';
 import { MODAL } from '../Store/Store';
+import './HowManyModal.css';
 
 const HowManyModal = (props) => {
   const { itemClicked, buttonText, modalType, clearItemClicked, handleSubmitItem } = props;
@@ -37,11 +37,8 @@ const HowManyModal = (props) => {
         </div>
 
         <div className="HowManyModal__buttons">
-          <button className="HowManyModal__cancel-button" onClick={clearItemClicked}>
-            Cancel
-          </button>
-
-          <button className="HowManyModal__confirm-button">{buttonText}</button>
+          <ModalButton type="cancel" text="Cancel" handleOnClick={clearItemClicked} />
+          <ModalButton type="confirm" text={buttonText} />
         </div>
       </form >
     </div>
