@@ -3,7 +3,8 @@ import './HowManyModal.css';
 import { ACTIONS } from '../Store/Store';
 import { MODAL } from '../Store/Store';
 
-const HowManyModal = ({ itemClicked, buttonText, modalType, dispatchCart, clearItemClicked, submitItem }) => {
+const HowManyModal = (props) => {
+  const { itemClicked, buttonText, modalType, clearItemClicked, handleSubmitItem } = props;
 
   const [howMany, setHowMany] = useState(1);
 
@@ -12,10 +13,9 @@ const HowManyModal = ({ itemClicked, buttonText, modalType, dispatchCart, clearI
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const type = modalType === MODAL.ADD ? ACTIONS.ADD_TO_CART : ACTIONS.REMOVE_FROM_CART
+    // const type = modalType === MODAL.ADD ? ACTIONS.ADD_TO_CART : ACTIONS.REMOVE_FROM_CART
 
-    dispatchCart({ payload: { item: itemClicked, qty: howMany }, type });
-
+    handleSubmitItem(howMany);
     clearItemClicked();
   }
 

@@ -10,7 +10,7 @@ const ItemList = ({ type, items, dispatch, modalType, isCart }) => {
       {
         items.map(item => (
           <Item
-            key={item.name}
+            key={`${Date.now()}-${type}-${item.name}`}
             className={`${type}Item`}
             item={item}
             dispatch={dispatch}

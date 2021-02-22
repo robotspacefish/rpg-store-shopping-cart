@@ -11,8 +11,8 @@ const CartItems = ({ items, dispatch }) => (
       type="Cart"
       items={items}
       dispatch={dispatch}
-      isCart
       modalType={MODAL.REMOVE}
+      isCart
     />
 
     <div className="Cart__total">
