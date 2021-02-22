@@ -8,7 +8,7 @@ export default function cartReducer(cart, action) {
 
       return addToCart(cart, action.payload.item, action.payload.qty)
 
-    case ACTIONS.UPDATE_CART_ITEM:
+    case ACTIONS.UPDATE_QUANTITY:
 
       return updateQuantity(cart, action.payload.item, action.payload.qty)
 

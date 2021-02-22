@@ -2,23 +2,22 @@
  * Remove specified quantity of item from cart
  * @param {Array} cart
  * @param {Object} item
- * @param {Number} quantity
  * @return
  * @return
  */
-export const removeFromCart = (cart, item, quantity) => {
-  if (item.quantity === quantity) {
-    // remove entire item
-    return cart.filter(i => i.name !== item.name);
-  }
+export const removeFromCart = (cart, item) => {
+  // if (item.quantity === quantity) {
+  // remove entire item
+  return cart.filter(i => i.name !== item.name);
+  // }
 
   // remove quantity from item
-  return cart.map(i => (
-    i.name === item.name ?
-      { ...i, quantity: i.quantity -= quantity }
-      :
-      i
-  ))
+  // return cart.map(i => (
+  //   i.name === item.name ?
+  //     { ...i, quantity: i.quantity -= quantity }
+  //     :
+  //     i
+  // ))
 }
 
 /**
@@ -28,6 +27,7 @@ export const removeFromCart = (cart, item, quantity) => {
  * @param {Number} quantity
  */
 export const updateQuantity = (cart, item, quantity) => {
+
   return cart.map(i => (
     i.name === item.name ?
       { ...i, quantity: i.quantity += quantity } : i

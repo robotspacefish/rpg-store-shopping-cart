@@ -19,13 +19,22 @@ const Store = () => {
   const removeItemClickedFromCart = (item, qty) => dispatchCart({ type: ACTIONS.REMOVE_FROM_CART, payload: { item, qty } });
 
   const handleSubmitItem = (qty) => {
-    if (itemClicked.modalType === MODAL.ADD) {
-      return handleAddToCart(itemClicked.item, qty);
-    }
+    const fn = itemClicked.modalType === MODAL.ADD ?
+      handleAddToCart : handleRemoveFromCart;
 
-    removeItemClickedFromCart(itemClicked.item, qty, dispatchCart);
-
+    fn(itemClicked.item, qty);
   };
+
+  const handleRemoveFromCart = (item, qty) => {
+    const removeAll = item.quantity === qty;
+
+    if (removeAll) {
+      dispatchCart({ type: ACTIONS.REMOVE_FROM_CART, payload: { item } })
+
+    } else {
+      dispatchCart({ type: ACTIONS.UPDATE_QUANTITY, payload: { qty: -qty, item } });
+    }
+  }
 
   const handleAddToCart = (item, qty) => {
     const itemExists = cart.find(i => i.name === item);
