@@ -13,8 +13,6 @@ const HowManyModal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const type = modalType === MODAL.ADD ? ACTIONS.ADD_TO_CART : ACTIONS.REMOVE_FROM_CART
-
     handleSubmitItem(howMany);
     clearItemClicked();
   }
