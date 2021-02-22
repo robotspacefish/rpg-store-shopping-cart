@@ -18,11 +18,3 @@
 //   items.forEach(item => postItemToDb(db, item))
 // };
 
-export const STORE_ITEMS = [
-  { name: "Sword", price: 100 },
-  { name: "Shield", price: 60 },
-  { name: "Power Ring", price: 250 },
-  { name: "Bow", price: 90 },
-  { name: "Arrow", price: 5 },
-  { name: "Bomb", price: 10 }
-];

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Item.css';
-import { ACTIONS } from '../Store/Store';
+import { ACTIONS } from '../../helpers/constants';
 
 const Item = ({ item, className, dispatch, modalType, children }) => {
   return (
