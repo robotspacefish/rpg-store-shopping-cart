@@ -1,9 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import InventoryItems from '../InventoryItems/InventoryItems';
 import CartItems from '../CartItems/CartItems';
 import HowManyModal from '../HowManyModal/HowManyModal';
-
-import { addUpdate, deleteUpdate } from '../../helpers/cartHelpers';
 
 import './Store.css';
 
@@ -42,7 +40,6 @@ const cartReducer = (cart, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
       return addToCart(cart, action.payload.item, action.payload.qty)
-
     case ACTIONS.REMOVE_FROM_CART:
     // TODO
     default:
