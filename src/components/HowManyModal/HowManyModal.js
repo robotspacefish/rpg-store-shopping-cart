@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ModalButton from '../ModalButton/ModalButton';
-import { MODAL } from '../Store/Store';
+import { MODAL } from '../../helpers/constants';
 import './HowManyModal.css';
 
 const HowManyModal = (props) => {

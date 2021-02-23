@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemList from '../ItemList/ItemList';
-import { STORE_ITEMS } from '../../helpers/inventoryHelpers';
-import { MODAL } from '../Store/Store';
+import { STORE_ITEMS } from '../../helpers/constants';
+import { MODAL } from '../../helpers/constants';
 
 const InventoryItems = ({ dispatch }) => {
   return (

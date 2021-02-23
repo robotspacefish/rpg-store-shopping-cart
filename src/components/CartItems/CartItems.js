@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemList from '../ItemList/ItemList';
 import { total } from '../../helpers/cartHelpers';
-import { MODAL } from '../Store/Store';
+import { MODAL } from '../../helpers/constants';
 
 const CartItems = ({ items, dispatch }) => (
   <div className="Cart items-container">
