@@ -1,23 +1,11 @@
 /**
- * Remove specified quantity of item from cart
+ * Remove specified item from cart
  * @param {Array} cart
  * @param {Object} item
- * @return
- * @return
+ * @return {Array} cart without item specified
  */
 export const removeFromCart = (cart, item) => {
-  // if (item.quantity === quantity) {
-  // remove entire item
   return cart.filter(i => i.name !== item.name);
-  // }
-
-  // remove quantity from item
-  // return cart.map(i => (
-  //   i.name === item.name ?
-  //     { ...i, quantity: i.quantity -= quantity }
-  //     :
-  //     i
-  // ))
 }
 
 /**
@@ -25,19 +13,19 @@ export const removeFromCart = (cart, item) => {
  * @param {Array} cart
  * @param {Object} item
  * @param {Number} quantity
+ * @return {Array} cart with item with updated quantity
  */
-export const updateQuantity = (cart, item, quantity) => {
-
-  return cart.map(i => (
+export const updateQuantity = (cart, item, quantity) => (
+  cart.map(i => (
     i.name === item.name ?
       { ...i, quantity: i.quantity += quantity } : i
   ))
-}
+);
 
 /**
  * Add new item to cart or update existing item quantity
- * @param {Array} cart -
- * @param {Object} item - item to add
+ * @param {Array} cart - cart containing 0 or more items
+ * @param {Object} item
  * @param {Number} quantity
  * @return {Array} if cart is empty return new item in array
  * @return {Array} existing cart with new item added

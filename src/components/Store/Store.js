@@ -8,15 +8,12 @@ import { ACTIONS, MODAL } from '../../helpers/constants';
 
 import './Store.css';
 
-
 const Store = () => {
   const [cart, dispatchCart] = useReducer(cartReducer, []);
 
   const [itemClicked, dispatchItemClicked] = useReducer(itemClickedReducer, { isModalVisible: false, modalType: null, item: null });
 
   const clearItemClicked = () => dispatchItemClicked({ type: ACTIONS.CLEAR });
-
-  const removeItemClickedFromCart = (item, qty) => dispatchCart({ type: ACTIONS.REMOVE_FROM_CART, payload: { item, qty } });
 
   const handleSubmitItem = (qty) => {
     const fn = itemClicked.modalType === MODAL.ADD ?
@@ -28,12 +25,10 @@ const Store = () => {
   const handleRemoveFromCart = (item, qty) => {
     const removeAll = item.quantity === qty;
 
-    if (removeAll) {
+    removeAll ?
       dispatchCart({ type: ACTIONS.REMOVE_FROM_CART, payload: { item } })
-
-    } else {
+      :
       dispatchCart({ type: ACTIONS.UPDATE_QUANTITY, payload: { qty: -qty, item } });
-    }
   }
 
   const handleAddToCart = (item, qty) => {
