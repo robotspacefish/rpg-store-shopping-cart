@@ -6,7 +6,6 @@ The user can click an item in Inventory, enter a quantity, and add the item to t
 
 <figure>
   <img src="./demo.gif" alt="demo">
-  <figcaption>Demo</figcaption>
 </figure>
 
 Read my blog post about this project [here](https://dev.to/robotspacefish/using-react-hooks-to-make-an-rpg-shop-part-2-2o05).
