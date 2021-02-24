@@ -4,6 +4,10 @@ I made this to learn about React Hooks. I used `useReduce` and `useState` for th
 
 The user can click an item in Inventory, enter a quantity, and add the item to their cart. The cart will display the item name, quantity, and total cost for the item x quantity. The user can click an item in their cart to remove all or some amount of that item. The cart total of all items is also displayed and adjusts accordingly as items are added/removed.
 
+<figure>
+  <img src="./demo.gif" alt="demo">
+  <figcaption>Demo</figcaption>
+</figure>
 
 Read my blog post about this project [here](https://dev.to/robotspacefish/using-react-hooks-to-make-an-rpg-shop-part-2-2o05).
 
