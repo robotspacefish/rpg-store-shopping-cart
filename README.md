@@ -1,6 +1,15 @@
 # RPG Store Shopping Cart
 
-I made this to learn about React Hooks
+I made this to learn about React Hooks. I used `useReduce` and `useState` for this project.
+
+The user can click an item in Inventory, enter a quantity, and add the item to their cart. The cart will display the item name, quantity, and total cost for the item x quantity. The user can click an item in their cart to remove all or some amount of that item. The cart total of all items is also displayed and adjusts accordingly as items are added/removed.
+
+
+Read my blog post about this project [here](https://dev.to/robotspacefish/using-react-hooks-to-make-an-rpg-shop-part-2-2o05).
+
+Try the demo [here](https://robotspacefish.dev/rpg-store-shopping-cart/)
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
