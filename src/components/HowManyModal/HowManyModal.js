@@ -30,7 +30,7 @@ const HowManyModal = (props) => {
             min="1"
             max={`${modalType === MODAL.REMOVE ? itemClicked.quantity : 99}`}
             value={howMany}
-            onChange={e => handleOnChange(e)}
+            onChange={handleOnChange}
           />
         </div>
 
