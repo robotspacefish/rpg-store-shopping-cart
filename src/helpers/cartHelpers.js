@@ -18,7 +18,7 @@ export const removeFromCart = (cart, item) => {
 export const updateQuantity = (cart, item, quantity) => (
   cart.map(i => (
     i.name === item.name ?
-      { ...i, quantity: i.quantity += quantity } : i
+      { ...i, quantity: i.quantity + quantity } : i
   ))
 );
 
