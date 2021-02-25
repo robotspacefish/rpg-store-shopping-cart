@@ -32,7 +32,7 @@ const Store = () => {
   }
 
   const handleAddToCart = (item, qty) => {
-    const itemExists = cart.find(i => i.name === item);
+    const itemExists = cart.find(i => i.name === item.name);
 
     const type = itemExists ? ACTIONS.UPDATE_QUANTITY : ACTIONS.ADD_TO_CART;
 
